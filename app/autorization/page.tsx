@@ -1,3 +1,3 @@
 export default function Autorization() {
-    return <p>hello word</p>;
+    return <p>Select subitem</p>;
 } 

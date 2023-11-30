@@ -1,7 +1,33 @@
-export default function Blog() {
+import { Metadata } from "next";
+import Link from "next/link";
+
+async function getData() {
+    const response = await fetch("https://jsonplaceholder.typicode.com/posts");
+
+    return response.json();
+}
+
+export const metadata: Metadata = {
+    title: "Blog | Next App",
+};
+
+export default async function Blog() {
+    const posts = await getData();
+
     return(
-        <div>
-            <p>blog</p>
-        </div>
+        <>
+        
+            <h1>
+                <p>blog</p>
+            </h1>
+            <ul>
+                {posts.map((post : any) => {
+                    <li key={post.id}>
+                        <Link href={`/blog/${post.id}`}>{post.title}</Link>
+                    </li>
+                })}
+            </ul>
+        
+        </>
     )
 }
